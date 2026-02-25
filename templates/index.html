@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="home-container">
+
+    <div class="alerts-title">
+        ALERTS
+    </div>
+
+    {% if alerts %}
+        {% for alert in alerts %}
+            <div class="alert-box">
+
+                <div class="alert-header">
+                    🚨 Earthquake Alert
+                </div>
+
+                <div class="alert-message">
+                    {{ alert.message }}
+                </div>
+
+                <div class="alert-time">
+                    {{ alert.ist_time.strftime("%d %B %Y | %I:%M %p") }}
+                </div>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center;">No alerts available.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

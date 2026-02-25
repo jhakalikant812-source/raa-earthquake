@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>🚨 Admin Earthquake Alert Panel</h2>
+
+<form method="POST" action="/send_alert">
+    <button style="background:red; color:white; padding:20px; font-size:20px;">
+        SEND EARTHQUAKE ALERT
+    </button>
+</form>
+
+{% endblock %}

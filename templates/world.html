@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>World Earthquakes (Last 30 Days)</h1>
+
+{% if earthquakes %}
+    {% for eq in earthquakes %}
+        <div style="background:#e2dada; padding:15px; margin:10px 0; border-radius:10px;">
+            <h3>{{ eq.place }}</h3>
+            <p>Magnitude: {{ eq.mag }}</p>
+            <p>Date & Time: {{ eq.time }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No earthquake data found.</p>
+{% endif %}
+{% endblock %}
