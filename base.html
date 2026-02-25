@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RAA EARTHQUAKE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>RAA EARTHQUAKE</h2>
+   <a href="/">Home</a>
+<a href="/india">India</a>
+<a href="/world">World</a>
+
+<a href="/guide">📘 GUIDE</a>
+
+{% if session.get("user_id") %}
+    <a href="/account">Account</a>
+
+    {% if session.get("is_admin") %}
+        <a href="/admin">Rishav (Admin)</a>
+    {% endif %}
+
+    <a href="/logout">Logout</a>
+{% else %}
+    <a href="/login">Login</a>
+    <a href="/signup">Sign Up</a>
+{% endif %}
+
+<div style="margin-left:220px; padding:20px;">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>
+
+
+{% if session.get("is_admin") %}
+    <a href="/admin">Rishav (Admin)</a>
+{% endif %}
+
+
+{% if session.get("user_email") == "bharadwajrishav8434@gmail.com" 
+   or session.get("user_email") == "nitu9sharma9@gmail.com" %}
+    <a href="/rishav">Rishav (Admin)</a>
+{% endif %}
