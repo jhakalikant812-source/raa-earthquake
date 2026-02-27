@@ -5,31 +5,70 @@
 <div class="home-container">
 
     <div class="alerts-title">
-        ALERTS
+        🚨 LIVE EARTHQUAKE ALERTS
     </div>
 
-    {% if alerts %}
-        {% for alert in alerts %}
-            <div class="alert-box">
+    <div id="alert-container">
 
-                <div class="alert-header">
-                    🚨 Earthquake Alert
+        {% if alerts %}
+            {% for alert in alerts %}
+                <div class="alert-box">
+
+                    <div class="alert-header">
+                        🚨 Earthquake Alert
+                    </div>
+
+                    <div class="alert-message">
+                        {{ alert.message }}
+                    </div>
+
+                    <div class="alert-time">
+                        {{ alert.ist_time.strftime("%d %B %Y | %I:%M %p") }}
+                    </div>
+
                 </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align:center;">No alerts available.</p>
+        {% endif %}
 
-                <div class="alert-message">
-                    {{ alert.message }}
-                </div>
-
-                <div class="alert-time">
-                    {{ alert.ist_time.strftime("%d %B %Y | %I:%M %p") }}
-                </div>
-
-            </div>
-        {% endfor %}
-    {% else %}
-        <p style="text-align:center;">No alerts available.</p>
-    {% endif %}
+    </div>
 
 </div>
+
+<!-- 🔥 AUTO REFRESH SCRIPT -->
+<script>
+function fetchAlerts() {
+    fetch("/get_alerts")
+    .then(response => response.json())
+    .then(data => {
+
+        let container = document.getElementById("alert-container");
+        container.innerHTML = "";
+
+        if (data.alerts.length === 0) {
+            container.innerHTML = "<p style='text-align:center;'>No alerts available.</p>";
+            return;
+        }
+
+        data.alerts.forEach(alert => {
+
+            let box = document.createElement("div");
+            box.className = "alert-box";
+
+            box.innerHTML = `
+                <div class="alert-header">🚨 Earthquake Alert</div>
+                <div class="alert-message">${alert.message}</div>
+                <div class="alert-time">${alert.time}</div>
+            `;
+
+            container.appendChild(box);
+        });
+    });
+}
+
+// Refresh every 5 seconds
+setInterval(fetchAlerts, 5000);
+</script>
 
 {% endblock %}

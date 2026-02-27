@@ -77,7 +77,7 @@ button {
 }
 
 .alert-box {
-    background: #1e1e1e;
+    background: #ebe6e6;
     padding: 25px;
     margin-bottom: 20px;
     border-radius: 12px;
@@ -150,7 +150,7 @@ body {
 /* Sidebar */
 .sidebar {
     width: 220px;
-    background: #111;
+    background: #0a0909;
     color: white;
     display: flex;
     flex-direction: column;

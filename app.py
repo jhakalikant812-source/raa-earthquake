@@ -72,6 +72,36 @@ def send_alert():
 
     return "OK", 200
 
+
+
+
+@app.route("/get_alerts")
+def get_alerts():
+    alerts = Alert.query.order_by(Alert.date.desc()).all()
+
+    alert_list = []
+
+    for alert in alerts:
+        ist_time = alert.date + timedelta(hours=5, minutes=30)
+
+        alert_list.append({
+            "message": alert.message,
+            "time": ist_time.strftime("%d-%m-%Y %H:%M:%S")
+        })
+
+    return {"alerts": alert_list}
+
+
+
+
+
+
+
+
+
+
+
+
 # ================= SIGNUP =================
 
 @app.route("/signup", methods=["GET", "POST"])
