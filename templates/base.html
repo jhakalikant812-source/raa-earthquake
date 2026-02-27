@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RAA EARTHQUAKE</title>
+    <title>Raa Earthquake</title>
+
+    <!-- Mobile Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f6f9;
+            background-color: #f4f4f4;
         }
 
-        /* ===== Layout ===== */
+        /* Main Layout */
         .main-container {
             display: flex;
+            min-height: 100vh;
         }
 
-        /* ===== Sidebar ===== */
+        /* ================= SIDEBAR ================= */
         .sidebar {
-            width: 220px;
-            background: #111;
-            min-height: 100vh;
-            padding-top: 20px;
+            width: 230px;
+            background-color: #111;
+            padding: 20px;
+            color: white;
         }
 
         .sidebar h2 {
-            color: white;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .menu-box {
             background: #222;
-            margin: 10px;
+            margin: 10px 0;
             padding: 12px;
             border-radius: 8px;
             text-align: center;
             transition: 0.3s;
+        }
+
+        .menu-box:hover {
+            background: #333;
         }
 
         .menu-box a {
@@ -45,53 +52,34 @@
             display: block;
         }
 
-        .menu-box:hover {
-            background: #ff4444;
-        }
-
-        /* ===== Content Area ===== */
+        /* ================= CONTENT ================= */
         .content {
             flex: 1;
-            padding: 30px;
+            padding: 25px;
         }
 
-        .alerts-title {
-            text-align: center;
-            font-size: 26px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+        /* ================= MOBILE VIEW ================= */
+        @media (max-width: 768px) {
 
-        .alert-box {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-left: 6px solid red;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border-radius: 6px;
-        }
+            .main-container {
+                flex-direction: column;
+            }
 
-        .alert-header {
-            font-weight: bold;
-            color: red;
-            margin-bottom: 8px;
-        }
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
 
-        .alert-message {
-            font-size: 16px;
-            margin-bottom: 6px;
-        }
+            .menu-box {
+                width: 45%;
+                margin: 5px;
+            }
 
-        .alert-time {
-            font-size: 14px;
-            color: gray;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background: #111;
-            color: white;
+            .content {
+                padding: 15px;
+            }
         }
 
     </style>
@@ -101,57 +89,64 @@
 
 <div class="main-container">
 
-    <!-- ===== Sidebar ===== -->
+    <!-- ================= SIDEBAR ================= -->
     <div class="sidebar">
 
-        <h2>RAA</h2>
+        <h2>RAA EARTHQUAKE</h2>
 
         <div class="menu-box">
-            <a href="/">🏠 Home</a>
+            <a href="/">Home</a>
         </div>
 
         <div class="menu-box">
-            <a href="/india">🇮🇳 India</a>
+            <a href="/india">India</a>
         </div>
 
         <div class="menu-box">
-            <a href="/world">🌍 World</a>
+            <a href="/world">World</a>
         </div>
 
         <div class="menu-box">
-            <a href="/guide">📖 Guide</a>
+            <a href="/guide">Guide</a>
         </div>
 
-        <div class="menu-box">
-            <a href="/account">👤 Account</a>
-        </div>
+        {% if session.get("user_id") %}
+            <div class="menu-box">
+                <a href="/account">Account</a>
+            </div>
 
+            <div class="menu-box">
+                <a href="/logout">Logout</a>
+            </div>
+        {% else %}
+            <div class="menu-box">
+                <a href="/login">Login</a>
+            </div>
+
+            <div class="menu-box">
+                <a href="/signup">Signup</a>
+            </div>
+        {% endif %}
+
+        <!-- ✅ RISHAV ADMIN OPTION (ONLY ADMIN CAN SEE) -->
         {% if session.get("user_email") in [
-    "bharadwajrishav8434@gmail.com",
-    "nitu9sharma9@gmail.com"
-] %}
-<div class="menu-box">
-    <a href="/rishav">⭐ Rishav</a>
-</div>
-{% endif %}
-
-        <div class="menu-box">
-            <a href="/logout">🚪 Logout</a>
-        </div>
+            "bharadwajrishav8434@gmail.com",
+            "nitu9sharma9@gmail.com"
+        ] %}
+            <div class="menu-box">
+                <a href="/rishav">Rishav</a>
+            </div>
+        {% endif %}
 
     </div>
 
-    <!-- ===== Page Content ===== -->
+    <!-- ================= PAGE CONTENT ================= -->
     <div class="content">
         {% block content %}
         {% endblock %}
     </div>
 
 </div>
-
-<footer>
-    © 2026 RAA Earthquake | Developed by Kalikant
-</footer>
 
 </body>
 </html>

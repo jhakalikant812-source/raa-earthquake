@@ -2,73 +2,93 @@
 
 {% block content %}
 
+<style>
+    .home-container {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .alerts-title {
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .alert-box {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border-left: 6px solid red;
+        transition: 0.3s;
+    }
+
+    .alert-box:hover {
+        transform: scale(1.02);
+    }
+
+    .alert-header {
+        font-size: 18px;
+        font-weight: bold;
+        color: red;
+        margin-bottom: 10px;
+    }
+
+    .alert-message {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .alert-time {
+        font-size: 14px;
+        color: gray;
+        text-align: right;
+    }
+
+    /* Mobile Friendly */
+    @media (max-width: 768px) {
+        .alert-box {
+            padding: 15px;
+        }
+
+        .alerts-title {
+            font-size: 22px;
+        }
+    }
+</style>
+
 <div class="home-container">
 
     <div class="alerts-title">
-        🚨 LIVE EARTHQUAKE ALERTS
+        🚨 Earthquake Alerts
     </div>
 
-    <div id="alert-container">
+    {% if alerts %}
+        {% for alert in alerts %}
+            <div class="alert-box">
 
-        {% if alerts %}
-            {% for alert in alerts %}
-                <div class="alert-box">
-
-                    <div class="alert-header">
-                        🚨 Earthquake Alert
-                    </div>
-
-                    <div class="alert-message">
-                        {{ alert.message }}
-                    </div>
-
-                    <div class="alert-time">
-                        {{ alert.ist_time.strftime("%d %B %Y | %I:%M %p") }}
-                    </div>
-
+                <div class="alert-header">
+                    Earthquake Alert
                 </div>
-            {% endfor %}
-        {% else %}
-            <p style="text-align:center;">No alerts available.</p>
-        {% endif %}
 
-    </div>
+                <div class="alert-message">
+                    {{ alert.message }}
+                </div>
+
+                <div class="alert-time">
+                    {{ alert.ist_time.strftime("%d %B %Y | %I:%M %p") }}
+                </div>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert-box" style="text-align:center;">
+            No alerts available.
+        </div>
+    {% endif %}
 
 </div>
-
-<!-- 🔥 AUTO REFRESH SCRIPT -->
-<script>
-function fetchAlerts() {
-    fetch("/get_alerts")
-    .then(response => response.json())
-    .then(data => {
-
-        let container = document.getElementById("alert-container");
-        container.innerHTML = "";
-
-        if (data.alerts.length === 0) {
-            container.innerHTML = "<p style='text-align:center;'>No alerts available.</p>";
-            return;
-        }
-
-        data.alerts.forEach(alert => {
-
-            let box = document.createElement("div");
-            box.className = "alert-box";
-
-            box.innerHTML = `
-                <div class="alert-header">🚨 Earthquake Alert</div>
-                <div class="alert-message">${alert.message}</div>
-                <div class="alert-time">${alert.time}</div>
-            `;
-
-            container.appendChild(box);
-        });
-    });
-}
-
-// Refresh every 5 seconds
-setInterval(fetchAlerts, 5000);
-</script>
 
 {% endblock %}
