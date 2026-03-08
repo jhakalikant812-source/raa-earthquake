@@ -291,13 +291,6 @@ def edit_account():
         return redirect("/account")
 
     return render_template("edit_account.html")
-
-
-
-
-
-
-
 # ================= RUN APP =================
 
 
