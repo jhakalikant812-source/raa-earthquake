@@ -1,17 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>World Earthquakes (Last 30 Days)</h1>
 
-{% if earthquakes %}
-    {% for eq in earthquakes %}
-        <div style="background:#e2dada; padding:15px; margin:10px 0; border-radius:10px;">
-            <h3>{{ eq.place }}</h3>
-            <p>Magnitude: {{ eq.mag }}</p>
-            <p>Date & Time: {{ eq.time }}</p>
-        </div>
-    {% endfor %}
+<h2 style="text-align:center;">World Earthquakes</h2>
+
+<form method="POST" style="text-align:center;margin:20px 0;">
+
+<select name="country" style="padding:8px 12px;font-size:16px;">
+
+{% for country in countries %}
+<option value="{{ country }}" {% if country == selected_country %}selected{% endif %}>
+{{ country }}
+</option>
+{% endfor %}
+
+</select>
+
+<button type="submit" style="padding:8px 15px;background:#111;color:white;border:none;border-radius:6px;">
+Filter
+</button>
+
+</form>
+
+<div style="max-width:900px;margin:auto;">
+
+{% for eq in earthquakes %}
+
+<div style="border:2px solid #111;padding:15px;margin-bottom:15px;border-radius:10px;background:#f9f9f9;">
+
+<strong>Location:</strong> {{ eq.place }}<br>
+<strong>Magnitude:</strong> {{ eq.mag }}<br>
+<strong>Time:</strong> {{ eq.time }}
+
+</div>
+
 {% else %}
-    <p>No earthquake data found.</p>
-{% endif %}
+
+<p style="text-align:center;">No earthquakes found for this country.</p>
+
+{% endfor %}
+
+</div>
+<script>
+setTimeout(function(){
+    location.reload();
+}, 30000);  // 60000 ms = 60 seconds
+</script>
+
+<footer style="text-align:center;margin-top:40px;">
+<p>
+© 2026 RAA Earthquake Monitoring App |
+<a href="/privacy">Privacy Policy</a>
+</p>
+</footer>
+
 {% endblock %}

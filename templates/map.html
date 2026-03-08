@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 style="text-align:center;">Live Earthquake Map</h2>
+
+
+
+<style>
+#map{
+height:600px;
+width:100%;
+border:3px solid #111;
+position:relative;
+z-index:1;
+}
+
+/* Fix zoom button position */
+.leaflet-control-container{
+z-index:500;
+}
+</style>
+
+
+
+
+
+
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+// Create map
+var map = L.map('map', {
+    worldCopyJump: false,
+    maxBounds: [
+        [-90, -180],
+        [90, 180]
+    ],
+    maxBoundsViscosity: 1.0
+}).setView([20,0], 2);
+
+// Map tiles
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution:'© OpenStreetMap',
+    noWrap: true
+}).addTo(map);
+// USGS Earthquake API
+var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+
+// Fetch earthquake data
+fetch(url)
+.then(response => response.json())
+.then(data => {
+
+    data.features.forEach(eq => {
+
+        var coords = eq.geometry.coordinates;
+        var mag = eq.properties.mag;
+        var place = eq.properties.place;
+
+        var lat = coords[1];
+        var lon = coords[0];
+
+        // Marker color based on magnitude
+        var color = "green";
+
+        if(mag >= 6) color = "red";
+        else if(mag >= 4) color = "orange";
+
+        var marker = L.circleMarker([lat, lon],{
+            radius: mag * 2,
+            color: color,
+            fillColor: color,
+            fillOpacity: 0.8
+        }).addTo(map);
+
+        marker.bindPopup(
+            "<b>Location:</b> " + place +
+            "<br><b>Magnitude:</b> " + mag
+        );
+
+    });
+
+});
+
+</script>
+<script>
+setTimeout(function(){
+    location.reload();
+}, 30000);  // 60000 ms = 60 seconds
+</script>
+
+<footer style="text-align:center;margin-top:40px;">
+<p>
+© 2026 RAA Earthquake Monitoring App |
+<a href="/privacy">Privacy Policy</a>
+</p>
+</footer>
+
+{% endblock %}

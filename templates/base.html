@@ -1,182 +1,292 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Raa Earthquake</title>
+<title>Raa Earthquake</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta name="google-site-verification" content="aKhYEG-Q-t5PaNZiKUb1DyFniY4j3ITzPq1hrzK_0Fg" />
-
-
 
 <meta name="description" content="RAA Earthquake - Real time earthquake alerts and safety guide for India and world.">
 <meta name="keywords" content="RAA Earthquake, earthquake alert app, India earthquake, live earthquake data">
 <meta name="author" content="Raa Earthquake">
 <meta name="robots" content="index, follow">
 
+<style>
 
+/* ================= GLOBAL ================= */
 
+body{
+margin:0;
+padding:0;
+font-family:Arial, sans-serif;
+background:#f4f4f4;
+}
 
+/* ================= TOP BAR ================= */
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
+.topbar{
+background:#111;
+color:white;
+padding:12px 15px;
+display:flex;
+align-items:center;
+position:sticky;
+top:0;
+z-index:100;
+}
 
-        /* ================= TOP BAR ================= */
-        .topbar {
-            background: #111;
-            color: white;
-            padding: 12px 15px;
-            display: flex;
-            align-items: center;
-        }
+.menu-toggle{
+font-size:22px;
+cursor:pointer;
+margin-right:15px;
+}
 
-        .menu-toggle {
-            font-size: 22px;
-            cursor: pointer;
-            margin-right: 15px;
-        }
+.topbar-title{
+font-weight:bold;
+}
 
-        .topbar-title {
-            font-weight: bold;
-        }
+/* ================= SIDEBAR ================= */
 
-        /* ================= SIDEBAR ================= */
-        .sidebar {
-            position: fixed;
-            left: -250px;   /* Hidden by default */
-            top: 0;
-            width: 230px;
-            height: 100%;
-            background: #111;
-            padding: 20px;
-            color: white;
-            transition: 0.3s;
-            z-index: 1000;
-        }
+.sidebar{
+position:fixed;
+left:-250px;
+top:0;
+width:230px;
+height:100%;
+background:#111;
+padding:20px;
+color:white;
+transition:0.3s;
+z-index:1000;
+}
 
-        .sidebar.active {
-            left: 0;   /* Show when active */
-        }
+.sidebar.active{
+left:0;
+}
 
-        .menu-box {
-            background: #222;
-            margin: 10px 0;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            transition: 0.3s;
-        }
+.menu-box{
+background:#222;
+margin:10px 0;
+padding:12px;
+border-radius:10px;
+text-align:center;
+transition:0.3s;
+border:1px solid #444;
+}
 
-        .menu-box:hover {
-            background: #333;
-        }
+.menu-box:hover{
+background:#333;
+transform:scale(1.03);
+}
 
-        .menu-box a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            display: block;
-        }
+.menu-box a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+display:block;
+}
 
-        /* ================= CONTENT ================= */
-        .content {
-            padding: 20px;
-        }
+/* ================= PAGE CONTENT ================= */
 
-        /* Dark overlay when menu open */
-        .overlay {
-            display: none;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            top: 0;
-            left: 0;
-            z-index: 500;
-        }
+.content{
+padding:20px;
+margin:20px;
+background:white;
+border:3px solid #111;
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,0.15);
+}
 
-        .overlay.active {
-            display: block;
-        }
+/* ================= OVERLAY ================= */
 
-    </style>
+.overlay{
+display:none;
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+top:0;
+left:0;
+z-index:500;
+}
+
+.overlay.active{
+display:block;
+}
+
+</style>
 </head>
 
 <body>
 
 <!-- ================= TOP BAR ================= -->
+
 <div class="topbar">
-    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-    <div class="topbar-title">RAA EARTHQUAKE</div>
+<div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+<div class="topbar-title">RAA EARTHQUAKE</div>
 </div>
 
 <!-- ================= SIDEBAR ================= -->
+
+
 <div class="sidebar" id="sidebar">
 
-    <div class="menu-box">
-        <a href="/">Home</a>
-    </div>
+<!-- ALWAYS VISIBLE -->
 
-    <div class="menu-box">
-        <a href="/india">India</a>
-    </div>
+<div class="menu-box">
+<a href="/">🏠 Home</a>
+</div>
 
-    <div class="menu-box">
-        <a href="/world">World</a>
-    </div>
 
-    <div class="menu-box">
-        <a href="/guide">Guide</a>
-    </div>
+{% if session.get("user_id") %}
 
-    {% if session.get("user_id") %}
-        <div class="menu-box">
-            <a href="/account">Account</a>
-        </div>
+<!-- USER LOGGED IN -->
 
-        <div class="menu-box">
-            <a href="/logout">Logout</a>
-        </div>
-    {% else %}
-        <div class="menu-box">
-            <a href="/login">Login</a>
-        </div>
+<div class="menu-box">
+<a href="/asia">🌏 Asia</a>
+</div>
 
-        <div class="menu-box">
-            <a href="/signup">Signup</a>
-        </div>
-    {% endif %}
+<div class="menu-box">
+<a href="/world">🌍 World</a>
+</div>
 
-    <!-- 🔒 ADMIN ONLY -->
-    {% if session.get("user_email") in [
-        "bharadwajrishav8434@gmail.com",
-        "nitu9sharma9@gmail.com"
-    ] %}
-        <div class="menu-box">
-            <a href="/rishav">Rishav</a>
-        </div>
-    {% endif %}
+<div class="menu-box">
+<a href="/map">🗺 Earthquake Map</a>
+</div>
+
+<div class="menu-box">
+<a href="/guide">📘 Guide</a>
+</div>
+
+<div class="menu-box">
+<a href="/account">👤 Account</a>
+</div>
+
+<div class="menu-box">
+<a href="/logout">🚪 Logout</a>
+</div>
+
+{% else %}
+
+<!-- USER NOT LOGGED IN -->
+
+<div class="menu-box">
+<a href="/login">🔑 Login</a>
+</div>
+
+<div class="menu-box">
+<a href="/signup">📝 Signup</a>
+</div>
+
+{% endif %}
+
+
+<!-- ADMIN OPTION -->
+
+{% if session.get("user_email") in [
+"bharadwajrishav8434@gmail.com",
+"nitu9sharma9@gmail.com"
+] %}
+
+<div class="menu-box">
+<a href="/rishav">⚙ Admin Panel</a>
+</div>
+
+{% endif %}
+
+
+<!-- PRIVACY ALWAYS LAST -->
+
+<div class="menu-box">
+<a href="/privacy">🔒 Privacy Policy</a>
+</div>
 
 </div>
 
-<!-- Overlay -->
+<!-- ================= OVERLAY ================= -->
+
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
 <!-- ================= PAGE CONTENT ================= -->
+
 <div class="content">
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
 </div>
 
 <script>
-function toggleMenu() {
-    document.getElementById("sidebar").classList.toggle("active");
-    document.getElementById("overlay").classList.toggle("active");
+
+function toggleMenu(){
+
+document.getElementById("sidebar").classList.toggle("active");
+document.getElementById("overlay").classList.toggle("active");
+
 }
+
+</script>
+
+<script>
+
+// Store last earthquake ID to avoid repeated alerts
+let lastEarthquakeID = null;
+
+// Ask permission safely
+if ("Notification" in window) {
+
+if (Notification.permission === "default") {
+Notification.requestPermission();
+}
+
+}
+
+// Check earthquakes
+async function checkEarthquakes(){
+
+try{
+
+let url="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_hour.geojson";
+
+let response=await fetch(url);
+let data=await response.json();
+
+data.features.forEach(eq=>{
+
+let mag=eq.properties.mag;
+let place=eq.properties.place;
+let id=eq.id;
+
+if(mag>=6 && id!==lastEarthquakeID){
+
+lastEarthquakeID=id;
+
+if(Notification.permission==="granted"){
+
+new Notification("🚨 Large Earthquake Detected!",{
+body: place + " | Magnitude: " + mag,
+icon:"https://earthquake.usgs.gov/favicon.ico"
+});
+
+}
+
+}
+
+});
+
+}catch(error){
+
+console.log("Earthquake check error:",error);
+
+}
+
+}
+
+// Check every 60 seconds
+setInterval(checkEarthquakes,60000);
+
+// Run once
+checkEarthquakes();
+
 </script>
 
 </body>

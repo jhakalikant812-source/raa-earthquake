@@ -12,4 +12,37 @@
 </form>
 
 <p>Already have account? <a href="/login">Login</a></p>
+
+
+
+<input type="hidden" name="latitude" id="latitude">
+<input type="hidden" name="longitude" id="longitude">
+
+<script>
+if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
+
+        document.getElementById("latitude").value =
+        position.coords.latitude;
+
+        document.getElementById("longitude").value =
+        position.coords.longitude;
+
+    });
+}
+</script>
+
+
+
+
+
+<footer style="text-align:center;margin-top:40px;">
+<p>
+© 2026 RAA Earthquake Monitoring App |
+<a href="/privacy">Privacy Policy</a>
+</p>
+</footer>
+
+
+
 {% endblock %}

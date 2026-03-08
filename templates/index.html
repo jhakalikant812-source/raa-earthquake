@@ -3,92 +3,138 @@
 {% block content %}
 
 <style>
-    .home-container {
-        max-width: 800px;
-        margin: auto;
-    }
 
-    .alerts-title {
-        font-size: 28px;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 25px;
-    }
+/* IMAGE SECTION */
 
-    .alert-box {
-        background: white;
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        border-left: 6px solid red;
-        transition: 0.3s;
-    }
+.image-section{
+position:relative;
+margin-bottom:60px; /* space between images */
+}
 
-    .alert-box:hover {
-        transform: scale(1.02);
-    }
+/* FULL SCREEN IMAGE */
 
-    .alert-header {
-        font-size: 18px;
-        font-weight: bold;
-        color: red;
-        margin-bottom: 10px;
-    }
+.fullscreen-image{
+width:100%;
+height:100vh;
+object-fit:cover;
+display:block;
+border-radius:10px;
+}
 
-    .alert-message {
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
+/* TEXT ON IMAGE */
 
-    .alert-time {
-        font-size: 14px;
-        color: gray;
-        text-align: right;
-    }
+.hero-text{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:white;
+text-align:center;
+font-size:42px;
+font-weight:bold;
+text-shadow:2px 2px 10px rgba(0,0,0,0.8);
+max-width:700px;
+padding:20px;
+}
 
-    /* Mobile Friendly */
-    @media (max-width: 768px) {
-        .alert-box {
-            padding: 15px;
-        }
+/* PARAGRAPH BELOW IMAGE */
 
-        .alerts-title {
-            font-size: 22px;
-        }
-    }
+.image-description{
+max-width:900px;
+margin:30px auto;
+font-size:18px;
+line-height:1.7;
+color:black;        /* black text */
+font-weight:bold;   /* bold text */
+text-align:center;
+border-radius:10px;
+box-shadow:0 10px 20px rgba(0,0,0,0.1);
+padding:0 20px;
+}
 </style>
 
-<div class="home-container">
 
-    <div class="alerts-title">
-        🚨 Earthquake Alerts
-    </div>
+<!-- IMAGE 1 -->
 
-    {% if alerts %}
-        {% for alert in alerts %}
-            <div class="alert-box">
+<section class="image-section">
 
-                <div class="alert-header">
-                    Earthquake Alert
-                </div>
+<img src="{{ url_for('static', filename='image.png') }}" class="fullscreen-image">
 
-                <div class="alert-message">
-                    {{ alert.message }}
-                </div>
+<div class="hero-text">
+RAA EARTHQUAKE
+<br>
+<span style="font-size:18px;">
+Real-time earthquake monitoring platform
+</span>
+</div>
 
-                <div class="alert-time">
-                    {{ alert.ist_time.strftime("%d %B %Y | %I:%M %p") }}
-                </div>
+</section>
 
-            </div>
-        {% endfor %}
-    {% else %}
-        <div class="alert-box" style="text-align:center;">
-            No alerts available.
-        </div>
-    {% endif %}
+<div class="image-description">
+
+<p>
+<strong>RAA Earthquake</strong> is a modern earthquake monitoring web application designed to help people stay informed about seismic activity around the world. 
+Our platform provides real-time earthquake updates, clear information about magnitude and location, and an easy-to-use interface so anyone can quickly understand what is happening. 
+By combining reliable data with a clean design, RAA Earthquake makes it simple for users to stay aware and prepared.
+</p>
 
 </div>
 
+
+<!-- IMAGE 2 -->
+
+<section class="image-section">
+
+<img src="{{ url_for('static', filename='image copy.png') }}" class="fullscreen-image">
+
+</section>
+
+<div class="image-description">
+
+<p>
+With earthquakes happening unexpectedly across the globe, staying informed can make a big difference. 
+RAA Earthquake helps users monitor recent earthquakes, explore global seismic activity, and learn how to respond during natural disasters. 
+Our goal is to spread awareness and provide accurate information that can help communities stay safer and better prepared.
+</p>
+
+</div>
+
+
+<!-- IMAGE 3 -->
+
+<section class="image-section">
+
+<img src="{{ url_for('static', filename='img.raa.png') }}" class="fullscreen-image">
+
+</section>
+
+<div class="image-description">
+
+<p>
+RAA Earthquake is more than just an information website — it is a tool built to support awareness and safety. 
+By delivering fast updates, clear earthquake data, and helpful safety guides, the platform empowers users to understand earthquake risks and take action when needed. 
+Our mission is to make earthquake knowledge accessible to everyone, everywhere.
+</p>
+
+</div>
+
+
+<!-- ABOUT SECTION -->
+
+<section style="padding:40px; max-width:900px; margin:auto; text-align:center;">
+
+<h2>About Our App</h2>
+
+<p>
+RAA Earthquake aims to create a reliable and user-friendly platform for monitoring earthquakes worldwide. 
+The application focuses on delivering fast, accurate, and understandable information about seismic activity so that users can stay informed at all times.
+</p>
+
+</section>
+<footer style="text-align:center;margin-top:40px;">
+<p>
+© 2026 RAA Earthquake Monitoring App |
+<a href="/privacy">Privacy Policy</a>
+</p>
+</footer>
 {% endblock %}

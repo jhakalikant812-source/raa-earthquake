@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 style="text-align:center;">Asia Earthquakes (Last 30 Days)</h2>
+
+<!-- FILTER FORM -->
+<form method="POST" style="text-align:center;margin:20px 0;">
+    <select name="country" style="padding:8px 12px;font-size:16px;">
+        {% for country in countries %}
+            <option value="{{ country }}" {% if country == selected_country %}selected{% endif %}>{{ country }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" style="padding:8px 15px;background:red;color:white;border:none;border-radius:5px;">Filter</button>
+</form>
+
+<!-- EARTHQUAKE LIST -->
+<div style="max-width:900px;margin:auto;">
+    {% for eq in earthquakes %}
+    <div style="border:1px solid #111;padding:15px;margin-bottom:15px;border-radius:10px;background:#f9f9f9;">
+        <strong>Location:</strong> {{ eq.place }}<br>
+        <strong>Magnitude:</strong> {{ eq.mag }}<br>
+        <strong>Time:</strong> {{ eq.time }}
+    </div>
+    {% else %}
+    <p style="text-align:center;">No earthquakes found for this country.</p>
+    {% endfor %}
+</div>
+
+<script>
+setTimeout(function(){
+    location.reload();
+}, 30000);  // 60000 ms = 60 seconds
+</script>
+<footer style="text-align:center;margin-top:40px;">
+<p>
+© 2026 RAA Earthquake Monitoring App |
+<a href="/privacy">Privacy Policy</a>
+</p>
+</footer>
+{% endblock %}
