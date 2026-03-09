@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Raa Earthquake</title>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7255617068810954"
-     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+
+<title>RAA Earthquake | Live Earthquake Alerts & Global Earthquake Map</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<meta name="description" content="RAA Earthquake - Real time earthquake alerts and safety guide for India and world.">
+
+<meta name="keywords" content="earthquake alert, earthquake tracker, live earthquake map, India earthquake">
+
+<meta name="author" content="RAA Earthquake">
+
+<meta name="robots" content="index, follow">
+
+<meta name="theme-color" content="#111">
+
+<link rel="icon" href="https://earthquake.usgs.gov/favicon.ico">
+
 <meta name="google-site-verification" content="aKhYEG-Q-t5PaNZiKUb1DyFniY4j3ITzPq1hrzK_0Fg" />
 
-<meta name="description" content="RAA Earthquake - Real time earthquake alerts and safety guide for India and world.">
-<meta name="keywords" content="RAA Earthquake, earthquake alert app, India earthquake, live earthquake data">
-<meta name="author" content="Raa Earthquake">
-<meta name="robots" content="index, follow">
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7255617068810954"
+crossorigin="anonymous"></script>
 
 <style>
 
-/* ================= GLOBAL ================= */
-
 body{
 margin:0;
-padding:0;
 font-family:Arial, sans-serif;
 background:#f4f4f4;
 }
 
-/* ================= TOP BAR ================= */
+/* TOPBAR */
 
 .topbar{
 background:#111;
@@ -49,19 +57,21 @@ margin-right:15px;
 font-weight:bold;
 }
 
-/* ================= SIDEBAR ================= */
+/* SIDEBAR */
 
 .sidebar{
 position:fixed;
 left:-250px;
 top:0;
 width:230px;
-height:100%;
+height:100vh;
 background:#111;
-padding:20px;
-color:white;
+padding:10px;
+color:rgb(203, 190, 190);
 transition:0.3s;
 z-index:1000;
+overflow-y:auto;
+overflow-x:hidden;
 }
 
 .sidebar.active{
@@ -74,13 +84,11 @@ margin:10px 0;
 padding:12px;
 border-radius:10px;
 text-align:center;
-transition:0.3s;
 border:1px solid #444;
 }
 
 .menu-box:hover{
 background:#333;
-transform:scale(1.03);
 }
 
 .menu-box a{
@@ -90,18 +98,18 @@ font-weight:bold;
 display:block;
 }
 
-/* ================= PAGE CONTENT ================= */
+/* CONTENT */
 
 .content{
 padding:20px;
 margin:20px;
 background:white;
 border:3px solid #111;
-border-radius:12px;
-box-shadow:0 6px 20px rgba(0,0,0,0.15);
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* ================= OVERLAY ================= */
+/* OVERLAY */
 
 .overlay{
 display:none;
@@ -118,31 +126,42 @@ z-index:500;
 display:block;
 }
 
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:25px;
+background:#111;
+color:#ccc;
+margin-top:40px;
+}
+
+footer a{
+color:#ccc;
+text-decoration:none;
+margin:0 10px;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<!-- ================= TOP BAR ================= -->
+<!-- TOP BAR -->
 
 <div class="topbar">
-<div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
 <div class="topbar-title">RAA EARTHQUAKE</div>
 </div>
 
-<!-- ================= SIDEBAR ================= -->
-<div class="sidebar" id="sidebar">
+<!-- SIDEBAR -->
 
-<!-- ALWAYS VISIBLE -->
+<div class="sidebar" id="sidebar">
 
 <div class="menu-box">
 <a href="/">🏠 Home</a>
 </div>
-
-
-{% if session.get("user_id") %}
-
-<!-- USER LOGGED IN -->
 
 <div class="menu-box">
 <a href="/asia">🌏 Asia</a>
@@ -157,11 +176,17 @@ display:block;
 </div>
 
 <div class="menu-box">
-<a href="/guide">📘 Guide</a>
+<a href="/guide">📘 Safety Guide</a>
 </div>
 
+<hr style="border:0.5px solid #444;margin:15px 0;">
+
+<!-- USER OPTIONS -->
+
+{% if session.get("user_id") %}
+
 <div class="menu-box">
-<a href="/account">👤 Account</a>
+<a href="/account">👤 My Account</a>
 </div>
 
 <div class="menu-box">
@@ -169,8 +194,6 @@ display:block;
 </div>
 
 {% else %}
-
-<!-- USER NOT LOGGED IN -->
 
 <div class="menu-box">
 <a href="/login">🔑 Login</a>
@@ -182,8 +205,7 @@ display:block;
 
 {% endif %}
 
-
-<!-- ADMIN OPTION -->
+<!-- ADMIN PANEL -->
 
 {% if session.get("user_email") in [
 "bharadwajrishav8434@gmail.com",
@@ -196,12 +218,9 @@ display:block;
 
 {% endif %}
 
-
-<!-- ================= ALWAYS SHOW PAGES ================= -->
-
 <hr style="border:0.5px solid #444;margin:15px 0;">
 
-
+<!-- LEGAL PAGES -->
 
 <div class="menu-box">
 <a href="/about">ℹ About Us</a>
@@ -219,49 +238,52 @@ display:block;
 <a href="/privacy">🔒 Privacy Policy</a>
 </div>
 
+
 </div>
-<!-- ================= OVERLAY ================= -->
+
+<!-- OVERLAY -->
 
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-<!-- ================= PAGE CONTENT ================= -->
+<!-- CONTENT -->
 
 <div class="content">
+
 {% block content %}
 {% endblock %}
+
 </div>
+
+<!-- FOOTER -->
+
+
 
 <script>
 
 function toggleMenu(){
-
 document.getElementById("sidebar").classList.toggle("active");
 document.getElementById("overlay").classList.toggle("active");
-
 }
 
 </script>
 
 <script>
 
-// Store last earthquake ID to avoid repeated alerts
-let lastEarthquakeID = null;
+let lastEarthquakeID=null;
 
-// Ask permission safely
-if ("Notification" in window) {
+if("Notification" in window){
 
-if (Notification.permission === "default") {
+if(Notification.permission==="default"){
 Notification.requestPermission();
 }
 
 }
 
-// Check earthquakes
 async function checkEarthquakes(){
 
 try{
 
-let url="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_hour.geojson";
+let url="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 
 let response=await fetch(url);
 let data=await response.json();
@@ -279,7 +301,7 @@ lastEarthquakeID=id;
 if(Notification.permission==="granted"){
 
 new Notification("🚨 Large Earthquake Detected!",{
-body: place + " | Magnitude: " + mag,
+body:place+" | Magnitude: "+mag,
 icon:"https://earthquake.usgs.gov/favicon.ico"
 });
 
@@ -289,18 +311,15 @@ icon:"https://earthquake.usgs.gov/favicon.ico"
 
 });
 
-}catch(error){
+}catch(e){
 
-console.log("Earthquake check error:",error);
-
-}
+console.log(e);
 
 }
 
-// Check every 60 seconds
+}
+
 setInterval(checkEarthquakes,60000);
-
-// Run once
 checkEarthquakes();
 
 </script>
