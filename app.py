@@ -3,12 +3,20 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 import requests
 import os
-
+from flask_mail import Mail, Message
+from flask import request, render_template
 # ================= APP =================
 
 app = Flask(__name__)
 app.secret_key = "raa_super_secret_key"
+# Email settings
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'raa.earthquake.2.0@gmail.com'
+app.config['MAIL_PASSWORD'] = 'soeg zmof dhse utjs'
 
+mail = Mail(app)
 # ================= DATABASE =================
 
 database_url = os.environ.get("DATABASE_URL")
@@ -291,6 +299,54 @@ def edit_account():
         return redirect("/account")
 
     return render_template("edit_account.html")
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+
+    if request.method == "POST":
+
+        name = request.form.get("name")
+        email = request.form.get("email")
+        message = request.form.get("message")
+
+        msg = Message(
+            subject="New Contact Message",
+            sender=app.config['MAIL_USERNAME'],
+            recipients=["raa.earthquake.2.0@gmail.com"]
+        )
+
+        msg.body = f"""
+New message from website
+
+Name: {name}
+Email: {email}
+
+Message:
+{message}
+"""
+
+        mail.send(msg)
+
+        return render_template("contact.html", success=True)
+
+    return render_template("contact.html")
+
+@app.route("/terms")
+def terms():
+    return render_template("terms.html")
+
+
+
+
+
+
+
 # ================= RUN APP =================
 
 

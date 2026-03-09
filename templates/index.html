@@ -8,7 +8,7 @@
 
 .image-section{
 position:relative;
-margin-bottom:60px; /* space between images */
+margin-bottom:60px;
 }
 
 /* FULL SCREEN IMAGE */
@@ -44,17 +44,54 @@ max-width:900px;
 margin:30px auto;
 font-size:18px;
 line-height:1.7;
-color:black;        /* black text */
-font-weight:bold;   /* bold text */
+color:black;
+font-weight:bold;
 text-align:center;
 border-radius:10px;
 box-shadow:0 10px 20px rgba(0,0,0,0.1);
 padding:0 20px;
 }
+
+/* LATEST EARTHQUAKE LIST */
+
+#quakeList{
+max-width:800px;
+margin:auto;
+padding:0;
+list-style:none;
+}
+
+#quakeList li{
+background:#f3f3f3;
+margin:10px 0;
+padding:12px;
+border-radius:8px;
+font-weight:bold;
+}
+
 </style>
 
 
-<!-- IMAGE 1 -->
+
+<!-- ================= ABOUT INTRO ================= -->
+
+<h2>About RAA Earthquake</h2>
+
+<p>
+RAA Earthquake is a real-time earthquake monitoring platform that provides
+live earthquake data from around the world. The platform helps users track
+recent seismic activity and stay informed about earthquake events.
+</p>
+
+<p>
+Our website also provides earthquake safety guidance and educational
+information to help people understand earthquakes and how to respond
+during seismic events.
+</p>
+
+
+
+<!-- ================= IMAGE 1 ================= -->
 
 <section class="image-section">
 
@@ -81,7 +118,35 @@ By combining reliable data with a clean design, RAA Earthquake makes it simple f
 </div>
 
 
-<!-- IMAGE 2 -->
+
+<!-- ================= LATEST EARTHQUAKES ================= -->
+
+<h2 style="text-align:center;margin-top:50px;">Latest Earthquakes</h2>
+
+<ul id="quakeList"></ul>
+
+
+
+<!-- ================= ADSENSE AD ================= -->
+
+<div style="margin:40px 0;text-align:center;">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-7255617068810954"
+data-ad-slot="123456789"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+
+<!-- ================= IMAGE 2 ================= -->
 
 <section class="image-section">
 
@@ -100,7 +165,59 @@ Our goal is to spread awareness and provide accurate information that can help c
 </div>
 
 
-<!-- IMAGE 3 -->
+
+<!-- ================= LIVE MAP ================= -->
+
+
+
+
+<h2 style="text-align:center;margin-top:50px;">Live Earthquake Map</h2>
+
+<div id="map" style="height:500px;border-radius:10px;"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+if (window.mapInstance) {
+    window.mapInstance.remove();
+}
+
+var map = L.map('map').setView([20,0],2);
+window.mapInstance = map;
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+maxZoom:18
+}).addTo(map);
+
+fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
+.then(response => response.json())
+.then(data => {
+
+data.features.forEach(eq => {
+
+let coords = eq.geometry.coordinates;
+let mag = eq.properties.mag;
+let place = eq.properties.place;
+
+L.circleMarker([coords[1],coords[0]],{
+radius: mag * 2,
+color:"red"
+})
+.addTo(map)
+.bindPopup("Magnitude: "+mag+"<br>"+place);
+
+});
+
+});
+
+</script>
+
+
+
+<!-- ================= IMAGE 3 ================= -->
 
 <section class="image-section">
 
@@ -119,7 +236,39 @@ Our mission is to make earthquake knowledge accessible to everyone, everywhere.
 </div>
 
 
-<!-- ABOUT SECTION -->
+
+<!-- ================= EARTHQUAKE EDUCATION ================= -->
+
+<section style="padding:40px; max-width:900px; margin:auto; text-align:center;">
+
+<h2>Earthquake Education</h2>
+
+<p>
+Earthquakes occur when energy stored within the Earth's crust is suddenly released. 
+This usually happens due to movement of tectonic plates along fault lines.
+</p>
+
+<h3>How Earthquakes Are Measured</h3>
+
+<p>
+Scientists measure earthquakes using instruments called seismographs.
+The magnitude scale indicates the strength of an earthquake.
+</p>
+
+<h3>Earthquake Safety Tips</h3>
+
+<ul style="text-align:left;max-width:500px;margin:auto;">
+<li>Stay calm during shaking</li>
+<li>Drop, cover, and hold on</li>
+<li>Stay away from windows</li>
+<li>If outdoors, move to an open area</li>
+</ul>
+
+</section>
+
+
+
+<!-- ================= ABOUT APP ================= -->
 
 <section style="padding:40px; max-width:900px; margin:auto; text-align:center;">
 
@@ -131,10 +280,62 @@ The application focuses on delivering fast, accurate, and understandable informa
 </p>
 
 </section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
 <footer style="text-align:center;margin-top:40px;">
 <p>
 © 2026 RAA Earthquake Monitoring App |
+<a href="/about">About</a> |
+<a href="/contact">Contact</a> |
+<a href="/terms">Terms</a> |
 <a href="/privacy">Privacy Policy</a>
 </p>
 </footer>
+
+
+
+<!-- ================= EARTHQUAKE SCRIPT ================= -->
+
+<script>
+
+async function loadEarthquakes(){
+
+try{
+
+let url="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
+
+let response=await fetch(url);
+let data=await response.json();
+
+let list=document.getElementById("quakeList");
+
+data.features.slice(0,10).forEach(eq=>{
+
+let mag=eq.properties.mag;
+let place=eq.properties.place;
+let time=new Date(eq.properties.time).toLocaleTimeString();
+
+let item=document.createElement("li");
+
+item.innerHTML="Magnitude " + mag + " - " + place + " - " + time;
+
+list.appendChild(item);
+
+});
+
+}catch(error){
+
+console.log("Error loading earthquakes:",error);
+
+}
+
+}
+
+loadEarthquakes();
+
+</script>
+
 {% endblock %}
