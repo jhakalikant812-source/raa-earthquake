@@ -344,7 +344,9 @@ def terms():
 
 
 
-
+@app.route("/ping")
+def ping():
+    return "ok"
 
 
 # ================= RUN APP =================
