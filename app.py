@@ -349,6 +349,21 @@ def ping():
     return "ok"
 
 
+
+
+
+from flask import send_from_directory
+
+@app.route('/ads.txt')
+def ads():
+    return send_from_directory('.', 'ads.txt')
+
+
+
+
+
+
+
 # ================= RUN APP =================
 
 
