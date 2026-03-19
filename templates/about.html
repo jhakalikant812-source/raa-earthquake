@@ -2,30 +2,184 @@
 
 {% block content %}
 
-<div class="container mt-4">
-    <h1>About Us</h1>
+<style>
 
-    <p>
-        RAA Earthquake is a platform designed to provide real-time information
-        about earthquake activity around the world.
-    </p>
+/* ABOUT PAGE */
 
-    <p>
-        Our website collects earthquake data from reliable sources and presents
-        it in an easy-to-understand format so users can stay informed about
-        seismic events.
-    </p>
+.about-container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
 
-    <p>
-        Our mission is to increase awareness about earthquakes and provide
-        helpful information about earthquake safety and monitoring.
-    </p>
+/* TEAM SECTION */
 
-    <p>
-        This website is built to help users explore earthquake data,
-        understand seismic activity, and learn how to stay safe during
-        natural disasters.
-    </p>
+.team{
+display:flex;
+gap:30px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.member{
+background:#f9f9f9;
+padding:25px;
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,0.15);
+width:300px;
+text-align:center;
+border:2px solid #111;
+transition:0.3s;
+}
+
+.member:hover{
+transform:scale(1.05);
+}
+
+.member h3{
+margin-bottom:10px;
+}
+
+/* JOURNEY */
+
+.journey{
+margin-top:40px;
+line-height:1.8;
+font-size:17px;
+background:#fff;
+padding:25px;
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,0.15);
+border:2px solid #111;
+}
+
+</style>
+
+<div class="about-container">
+
+<h1 style="text-align:center;">About RAA Earthquake</h1>
+
+<p>
+RAA Earthquake is a real-time earthquake monitoring platform designed to
+provide accurate and fast information about seismic activity across the world.
+Our goal is to make earthquake data easy to understand so that anyone,
+regardless of technical knowledge, can stay informed about natural events.
+</p>
+
+<p>
+The platform collects earthquake data from trusted global sources and
+presents it in a clean and user-friendly format. Users can explore earthquake
+activity by region, check magnitudes, view locations, and stay updated
+with the latest seismic events happening worldwide.
+</p>
+
+<p>
+We focus on simplicity, speed, and reliability. Earthquakes happen without
+warning, and having quick access to information can make a difference.
+That is why RAA Earthquake is built to deliver real-time updates and
+help users stay aware at all times.
+</p>
+
+<p>
+In addition to data, we also aim to educate users by providing guidance
+on earthquake safety and awareness. Our platform is not just about
+information, but also about helping people understand risks and stay prepared.
+</p>
+
+<hr>
+
+<h2 style="text-align:center;">Our Team</h2>
+
+<div class="team">
+
+<div class="member">
+<h3>Rishav Bharadwaj</h3>
+<p><strong>Founder & Developer</strong></p>
+<p>Age: 14</p>
+<p>Student (Class 9)</p>
+<p><strong>School:</strong> S.N. C.B.S.E. SCHOOL, Birpur (Supaul)</p>
+<p>
+Rishav is the main developer behind RAA Earthquake. He built the platform
+from scratch and focused on creating a clean, fast, and useful system for
+real-time earthquake monitoring.
+</p>
 </div>
 
+<div class="member">
+<h3>Anurag Raj</h3>
+<p><strong>Co-Founder</strong></p>
+<p>Age: 15</p>
+<p>Student (Class 9)</p>
+<p><strong>School:</strong> S.N. C.B.S.E. SCHOOL, Birpur (Supaul)</p>
+<p>
+Anurag contributed to the development and growth of the platform,
+helping in planning, ideas, and improving the overall structure
+of the project.
+</p>
+</div>
+
+</div>
+
+<hr>
+
+<div class="journey">
+
+<h2 style="text-align:center;">Our Journey (RAA Groups)</h2>
+
+<p>
+RAA Earthquake is part of a bigger vision called <strong>RAA Groups</strong>.
+We started our journey as students with a strong interest in technology,
+coding, and building something meaningful that can help people.
+</p>
+
+<p>
+For nearly a year, we researched how earthquake systems work, how data
+is collected globally, and how to present it in a simple way for users.
+After months of learning and experimenting, we started building this
+platform step by step.
+</p>
+
+<p>
+The development process was not easy. We faced many challenges such as
+understanding APIs, designing the website, fixing errors, and improving
+performance. But we stayed consistent and continued working without giving up.
+</p>
+
+<p>
+RAA Groups represents our long-term vision of creating innovative digital
+platforms that solve real-world problems. RAA Earthquake is our first major
+project, and it reflects our dedication, learning, and passion for technology.
+</p>
+
+<p>
+Our aim is to keep improving this platform by adding new features like
+live maps, alerts, notifications, and advanced filters so users can get
+better and faster information.
+</p>
+
+<p>
+We believe that age is not a barrier to innovation. Even as students,
+we are committed to building impactful projects and growing step by step
+towards creating something big in the future.
+</p>
+
+<p>
+RAA Earthquake is just the beginning — and RAA Groups will continue to
+build more useful and powerful platforms in the coming years.
+</p>
+
+</div>
+
+</div>
+<footer style="text-align:center;margin-top:40px;">
+<p>
+© 2026 RAA Earthquake Monitoring App |
+<a href="/about">About</a> |
+<a href="/contact">Contact</a> |
+<a href="/terms">Terms</a> |
+<a href="/privacy">Privacy Policy</a> |
+<a href="/disclaimer">Disclaimer</a>
+</p>
+</footer>
 {% endblock %}

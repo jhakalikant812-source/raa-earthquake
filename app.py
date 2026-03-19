@@ -275,6 +275,18 @@ def privacy():
     return render_template("privacy.html")
 
 
+
+
+@app.route("/disclaimer")
+def disclaimer():
+    return render_template("disclaimer.html")
+
+
+
+
+
+
+
 @app.route("/edit_account", methods=["GET","POST"])
 def edit_account():
 
