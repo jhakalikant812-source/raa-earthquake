@@ -2,43 +2,147 @@
 
 {% block content %}
 
-<div class="main-content">
+<style>
 
-    <h1 style="text-align:center; font-size:40px; color:black; font-weight:bold;">
-        EARTHQUAKE SAFETY GUIDE
-    </h1>
+.guide-container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+line-height:1.8;
+}
 
-    <div class="guide-section">
-        <h2>🟢 BEFORE AN EARTHQUAKE</h2>
-        <ul>
-            <li>Secure heavy furniture to walls.</li>
-            <li>Keep emergency kit ready (water, food, torch, first aid).</li>
-            <li>Know safe places inside your home.</li>
-            <li>Make family emergency plan.</li>
-        </ul>
-    </div>
+.section{
+margin-top:25px;
+padding:20px;
+border-radius:12px;
+background:#f9f9f9;
+border:2px solid #111;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
 
-    <div class="guide-section">
-        <h2>🟡 DURING AN EARTHQUAKE</h2>
-        <ul>
-            <li>Drop, Cover, and Hold On.</li>
-            <li>Stay away from windows and glass.</li>
-            <li>Do NOT use elevators.</li>
-            <li>If outside, stay away from buildings and poles.</li>
-        </ul>
-    </div>
+h1, h2{
+text-align:center;
+}
 
-    <div class="guide-section">
-        <h2>🔴 AFTER AN EARTHQUAKE</h2>
-        <ul>
-            <li>Check yourself and others for injuries.</li>
-            <li>Be prepared for aftershocks.</li>
-            <li>Avoid damaged buildings.</li>
-            <li>Follow official safety instructions.</li>
-        </ul>
-    </div>
+ul{
+margin-top:10px;
+}
+
+</style>
+
+<div class="guide-container">
+
+<h1>Earthquake Safety & Awareness Guide</h1>
+
+<p>
+Earthquakes are natural disasters that can occur without warning and cause
+serious damage to life and property. Understanding earthquakes and knowing
+how to respond can help reduce risks and keep you and your family safe.
+This guide provides complete information about earthquakes, their causes,
+and safety measures.
+</p>
+
+<div class="section">
+<h2>What is an Earthquake?</h2>
+<p>
+An earthquake is the shaking of the Earth's surface caused by sudden movement
+of tectonic plates beneath the ground. These movements release energy in the
+form of seismic waves, which cause the ground to shake.
+</p>
+
+<p>
+Earthquakes can vary in intensity from minor tremors that are barely felt
+to major events that can destroy buildings and infrastructure.
+</p>
+</div>
+
+<div class="section">
+<h2>Causes of Earthquakes</h2>
+<ul>
+<li>Movement of tectonic plates</li>
+<li>Volcanic activity</li>
+<li>Fault line shifts</li>
+<li>Human activities like mining or drilling</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Types of Earthquakes</h2>
+<ul>
+<li><strong>Tectonic Earthquakes:</strong> Caused by plate movements</li>
+<li><strong>Volcanic Earthquakes:</strong> Related to volcanic eruptions</li>
+<li><strong>Collapse Earthquakes:</strong> Caused by underground cave collapse</li>
+<li><strong>Explosion Earthquakes:</strong> Due to man-made explosions</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Before an Earthquake (Preparedness)</h2>
+<ul>
+<li>Secure heavy furniture and objects</li>
+<li>Keep emergency kits ready</li>
+<li>Identify safe spots in your home</li>
+<li>Educate family members about safety steps</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>During an Earthquake</h2>
+<ul>
+<li><strong>Drop, Cover, and Hold On</strong></li>
+<li>Stay away from windows and glass</li>
+<li>Do not use elevators</li>
+<li>If outdoors, stay away from buildings and trees</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>After an Earthquake</h2>
+<ul>
+<li>Check for injuries and provide first aid</li>
+<li>Stay alert for aftershocks</li>
+<li>Avoid damaged buildings</li>
+<li>Follow official safety instructions</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Earthquake Safety in India</h2>
+<p>
+India is divided into different seismic zones, and some regions are more
+prone to earthquakes. Areas like the Himalayas, Northeast India, and parts
+of Gujarat are considered high-risk zones.
+</p>
+
+<p>
+It is important for people living in these areas to stay informed and
+prepared at all times.
+</p>
+</div>
+
+<div class="section">
+<h2>Why Use RAA Earthquake?</h2>
+<p>
+RAA Earthquake provides real-time earthquake data, live maps, and easy
+access to global earthquake information. Our platform helps users stay
+updated and aware of seismic activity around the world.
+</p>
+
+<p>
+You can explore earthquakes by region, check magnitudes, and learn safety
+guidelines — all in one place.
+</p>
+
+<p>
+👉 <a href="/">Go to Homepage</a><br>
+👉 <a href="/map">View Live Earthquake Map</a>
+</p>
 
 </div>
+
+</div>
+
+
 <footer style="text-align:center;margin-top:40px;">
 <p>
 © 2026 RAA Earthquake Monitoring App |
@@ -49,4 +153,6 @@
 <a href="/disclaimer">Disclaimer</a>
 </p>
 </footer>
+
+
 {% endblock %}

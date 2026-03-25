@@ -176,56 +176,90 @@ margin:0 10px;
 </div>
 
 <!-- SIDEBAR -->
-
 <div class="sidebar" id="sidebar">
 
-<div class="menu-box">
-<a href="/">🏠 Home</a>
+<div class="menu-box" onclick="toggleMenu()">
+    <span class="menu-icon">☰</span>
+    <span class="menu-text">Menu</span>
 </div>
 
 <div class="menu-box">
-<a href="/asia">🌏 Asia</a>
+<a href="/">
+    <span class="menu-icon">🏠</span>
+    <span class="menu-text">Home</span>
+</a>
 </div>
 
 <div class="menu-box">
-<a href="/world">🌍 World</a>
+<a href="/earthquake">
+    <span class="menu-icon">🌋</span>
+    <span class="menu-text">Earthquake</span>
+</a>
 </div>
 
 <div class="menu-box">
-<a href="/map">🗺 Earthquake Map</a>
+<a href="/asia">
+    <span class="menu-icon">🌏</span>
+    <span class="menu-text">Asia</span>
+</a>
 </div>
 
 <div class="menu-box">
-<a href="/guide">📘 Safety Guide</a>
+<a href="/world">
+    <span class="menu-icon">🌍</span>
+    <span class="menu-text">World</span>
+</a>
 </div>
 
-<hr style="border:0.5px solid #444;margin:15px 0;">
+<div class="menu-box">
+<a href="/map">
+    <span class="menu-icon">🗺</span>
+    <span class="menu-text">Map</span>
+</a>
+</div>
 
-<!-- USER OPTIONS -->
+<div class="menu-box">
+<a href="/guide">
+    <span class="menu-icon">📘</span>
+    <span class="menu-text">Guide</span>
+</a>
+</div>
+
+<hr style="border:0.5px solid #444;margin:10px;">
 
 {% if session.get("user_id") %}
 
 <div class="menu-box">
-<a href="/account">👤 My Account</a>
+<a href="/account">
+    <span class="menu-icon">👤</span>
+    <span class="menu-text">Account</span>
+</a>
 </div>
 
 <div class="menu-box">
-<a href="/logout">🚪 Logout</a>
+<a href="/logout">
+    <span class="menu-icon">🚪</span>
+    <span class="menu-text">Logout</span>
+</a>
 </div>
 
 {% else %}
 
 <div class="menu-box">
-<a href="/login">🔑 Login</a>
+<a href="/login">
+    <span class="menu-icon">🔑</span>
+    <span class="menu-text">Login</span>
+</a>
 </div>
 
 <div class="menu-box">
-<a href="/signup">📝 Signup</a>
+<a href="/signup">
+    <span class="menu-icon">📝</span>
+    <span class="menu-text">Signup</span>
+</a>
 </div>
 
 {% endif %}
-
-<!-- ADMIN PANEL -->
 
 {% if session.get("user_email") in [
 "bharadwajrishav8434@gmail.com",
@@ -233,35 +267,50 @@ margin:0 10px;
 ] %}
 
 <div class="menu-box">
-<a href="/rishav">⚙ Admin Panel</a>
+<a href="/rishav">
+    <span class="menu-icon">⚙</span>
+    <span class="menu-text">Admin</span>
+</a>
 </div>
 
 {% endif %}
 
-<hr style="border:0.5px solid #444;margin:15px 0;">
-
-<!-- LEGAL PAGES -->
+<hr style="border:0.5px solid #444;margin:10px;">
 
 <div class="menu-box">
-<a href="/about">ℹ About Us</a>
+<a href="/about">
+    <span class="menu-icon">ℹ</span>
+    <span class="menu-text">About</span>
+</a>
 </div>
 
 <div class="menu-box">
-<a href="/contact">📩 Contact Us</a>
+<a href="/contact">
+    <span class="menu-icon">📩</span>
+    <span class="menu-text">Contact</span>
+</a>
 </div>
 
 <div class="menu-box">
-<a href="/terms">📜 Terms & Conditions</a>
+<a href="/terms">
+    <span class="menu-icon">📜</span>
+    <span class="menu-text">Terms</span>
+</a>
 </div>
 
 <div class="menu-box">
-<a href="/privacy">🔒 Privacy Policy</a>
+<a href="/privacy">
+    <span class="menu-icon">🔒</span>
+    <span class="menu-text">Privacy</span>
+</a>
 </div>
 
 <div class="menu-box">
-<a href="/disclaimer">⚠ Disclaimer</a>
+<a href="/disclaimer">
+    <span class="menu-icon">⚠</span>
+    <span class="menu-text">Disclaimer</span>
+</a>
 </div>
-
 
 </div>
 

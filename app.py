@@ -372,7 +372,29 @@ def ads():
 
 
 
+@app.route("/earthquake")
+def earthquake():
+    return render_template("earthquake.html")
 
+@app.route("/what-is-earthquake")
+def what_is_earthquake():
+    return render_template("what-is-earthquake.html")
+
+@app.route("/richter-scale")
+def richter_scale():
+    return render_template("richter-scale.html")
+
+@app.route("/biggest-earthquakes")
+def biggest_earthquakes():
+    return render_template("biggest-earthquakes.html")
+
+@app.route("/earthquake-safety")
+def earthquake_safety():
+    return render_template("earthquake-safety.html")
+
+@app.route("/earthquakes-india")
+def earthquakes_india():
+    return render_template("earthquakes-india.html")
 
 
 

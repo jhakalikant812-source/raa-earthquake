@@ -4,8 +4,6 @@
 
 <h2 style="text-align:center;">Live Earthquake Map</h2>
 
-
-
 <style>
 #map{
 height:600px;
@@ -15,48 +13,42 @@ position:relative;
 z-index:1;
 }
 
-/* Fix zoom button position */
 .leaflet-control-container{
 z-index:500;
 }
+
+.article{
+max-width:1000px;
+margin:auto;
+margin-top:30px;
+line-height:1.8;
+background:#f9f9f9;
+padding:25px;
+border-radius:12px;
+border:2px solid #111;
+}
 </style>
 
-
-
-
-
-
-
-<!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <div id="map"></div>
 
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-
-// Create map
 var map = L.map('map', {
     worldCopyJump: false,
-    maxBounds: [
-        [-90, -180],
-        [90, 180]
-    ],
+    maxBounds: [[-90, -180],[90, 180]],
     maxBoundsViscosity: 1.0
 }).setView([20,0], 2);
-
-// Map tiles
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
     attribution:'© OpenStreetMap',
     noWrap: true
 }).addTo(map);
-// USGS Earthquake API
+
 var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
 
-// Fetch earthquake data
 fetch(url)
 .then(response => response.json())
 .then(data => {
@@ -70,9 +62,7 @@ fetch(url)
         var lat = coords[1];
         var lon = coords[0];
 
-        // Marker color based on magnitude
         var color = "green";
-
         if(mag >= 6) color = "red";
         else if(mag >= 4) color = "orange";
 
@@ -91,13 +81,122 @@ fetch(url)
     });
 
 });
-
 </script>
+
 <script>
 setTimeout(function(){
     location.reload();
-}, 30000);  // 60000 ms = 60 seconds
+}, 30000);
 </script>
+
+<!-- ================= ARTICLE CONTENT ================= -->
+
+<div class="article">
+
+<h2>Understanding the Live Earthquake Map</h2>
+
+<p>
+The live earthquake map is a powerful tool that allows users to track seismic activity across the world in real time.
+It displays earthquake locations, magnitudes, and affected areas using data collected from reliable global monitoring systems.
+This feature helps users stay informed about ongoing earthquake activity and understand global seismic patterns.
+</p>
+
+<h2>How This Earthquake Map Works</h2>
+
+<p>
+This map uses real-time data from trusted sources to show earthquakes that have occurred in the last 24 hours.
+Each earthquake is represented by a circular marker on the map. The size and color of the marker indicate the strength of the earthquake.
+</p>
+
+<ul>
+<li>Green markers represent low magnitude earthquakes</li>
+<li>Orange markers represent moderate earthquakes</li>
+<li>Red markers represent strong earthquakes</li>
+</ul>
+
+<p>
+By clicking on any marker, users can see details such as the location and magnitude of the earthquake.
+This makes it easy to quickly understand where seismic activity is happening.
+</p>
+
+<h2>Why Monitoring Earthquakes is Important</h2>
+
+<p>
+Earthquakes can occur without warning and can have devastating effects on communities.
+Monitoring earthquake activity helps scientists, governments, and individuals stay prepared.
+It also helps in reducing damage by providing early awareness.
+</p>
+
+<p>
+Real-time earthquake monitoring is especially important for regions that are prone to seismic activity.
+It allows people to take precautionary measures and stay alert.
+</p>
+
+<h2>Understanding Earthquake Magnitude</h2>
+
+<p>
+The magnitude of an earthquake indicates how much energy is released during the event.
+Higher magnitude earthquakes release more energy and can cause more damage.
+</p>
+
+<p>
+For example:
+</p>
+
+<ul>
+<li>Magnitude 3 or below: Usually not felt</li>
+<li>Magnitude 4–5: Light shaking</li>
+<li>Magnitude 6–7: Strong and potentially damaging</li>
+<li>Magnitude 8+: Major destruction</li>
+</ul>
+
+<h2>Global Earthquake Trends</h2>
+
+<p>
+Earthquakes occur most frequently along tectonic plate boundaries.
+Regions such as the Pacific Ring of Fire experience a high number of earthquakes due to intense geological activity.
+</p>
+
+<p>
+By observing the map regularly, users can identify patterns and understand which regions are more prone to earthquakes.
+</p>
+
+<h2>Limitations of Earthquake Prediction</h2>
+
+<p>
+While this map provides real-time data, it is important to understand that earthquakes cannot be predicted accurately.
+Scientists can identify high-risk areas but cannot determine the exact time or location of future earthquakes.
+</p>
+
+<h2>How This Tool Helps Users</h2>
+
+<p>
+This earthquake map is designed to provide easy access to real-time data in a simple and understandable format.
+It helps users:
+</p>
+
+<ul>
+<li>Stay informed about global earthquake activity</li>
+<li>Understand earthquake magnitude and impact</li>
+<li>Track seismic events in real time</li>
+<li>Increase awareness about natural disasters</li>
+</ul>
+
+<h2>Safety Reminder</h2>
+
+<p>
+While tracking earthquakes is useful, it is equally important to know how to respond during an earthquake.
+Users are encouraged to learn safety measures and stay prepared at all times.
+</p>
+
+<p>
+👉 <a href="/earthquake-safety">Read Earthquake Safety Tips</a><br>
+👉 <a href="/earthquake">Explore More Articles</a>
+</p>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
 
 <footer style="text-align:center;margin-top:40px;">
 <p>
